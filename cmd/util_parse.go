@@ -19,15 +19,15 @@ func ReadStdinLines() []string {
 	return lines
 }
 
-func ReadMessageFromStdinJson(lines []string) ([]messaging.Message, error) {
-	results := make([]messaging.Message, len(lines))
+func ReadMessageFromStdinJson(lines []string) ([]*messaging.Message, error) {
+	results := make([]*messaging.Message, len(lines))
 
 	for i := 0; i < len(lines); i++ {
 		msg, err := ParseMessageLine(lines[i])
 		if err != nil {
 			return nil, err
 		}
-		results[i] = *msg
+		results[i] = msg
 	}
 	return results, nil
 }

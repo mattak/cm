@@ -12,11 +12,14 @@ var (
 		Short: "Kick cloud message",
 		Long:  "Kick cloud message",
 		Example: `
-  cm kick myproject < reservation.jsons
+  cm kick myproject < reservation.json
 
-reservation.jsons format: 
-  {"token":"token1","data":{}}
-  {"token":"token2","data":{}}
+Format: 
+  Each json should be compressed in single line.
+
+  e.g.
+  {"token":"token1","notification":{"title":"sample title","body":"sample body"}}
+  {"token":"token2","data":{},"topic":"sample"}
 `,
 		Run: runCommandKick,
 	}
