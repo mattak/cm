@@ -16,4 +16,5 @@ func Execute() error {
 
 func init() {
 	RootCmd.AddCommand(KickCmd)
+	RootCmd.AddCommand(VersionCmd)
 }
