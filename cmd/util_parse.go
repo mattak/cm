@@ -5,6 +5,7 @@ import (
 	"firebase.google.com/go/messaging"
 	"io/ioutil"
 	"os"
+	"regexp"
 	"strings"
 )
 
@@ -16,6 +17,7 @@ func ReadStdinLines() []string {
 	allText := string(bytes)
 	allText = strings.TrimRight(allText, "\n")
 	lines := strings.Split(allText, "\n")
+
 	return lines
 }
 
@@ -40,4 +42,17 @@ func ParseMessageLine(line string) (*messaging.Message, error) {
 		return nil, err
 	}
 	return &msg, nil
+}
+
+func TrimEmptyLines(lines []string) []string {
+	newLines := []string{}
+	emptyRegex := regexp.MustCompile("^#?\\s*$")
+
+	for i := 0; i < len(lines); i++ {
+		if !emptyRegex.MatchString(lines[i]) {
+			newLines = append(newLines, lines[i])
+		}
+	}
+
+	return newLines
 }

@@ -6,9 +6,15 @@ import (
 	"firebase.google.com/go/messaging"
 	"fmt"
 	"log"
+	"os"
 )
 
 func PushNotifications(projectId string, msgs []*messaging.Message, dryrun bool) {
+	if len(msgs) < 1 {
+		fmt.Fprintln(os.Stderr, "INFO: msgs are empty. skip sending notifications.")
+		return
+	}
+
 	ctx := context.Background()
 	config := firebase.Config{ProjectID: projectId}
 	app, err := firebase.NewApp(ctx, &config)

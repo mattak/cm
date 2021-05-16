@@ -41,6 +41,7 @@ func runCommandKick(cmd *cobra.Command, args []string) {
 	projectId := args[0]
 
 	lines := ReadStdinLines()
+	lines = TrimEmptyLines(lines)
 	msgs, err := ReadMessageFromStdinJson(lines)
 	if err != nil {
 		log.Fatal(err)
